@@ -80,6 +80,10 @@ export function OnboardingTour({
         } else {
           driverObj.moveNext()
         }
+      },
+      onCloseClick: () => {
+        // Close button clicked - destroy the tour and mark as completed
+        driverObj.destroy()
       }
     })
 

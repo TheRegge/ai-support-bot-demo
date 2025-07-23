@@ -1,11 +1,24 @@
-/* Custom driver.js theme to match blue design */
+/* Custom driver.js theme to match blue design - use high specificity */
 
-.driver-theme-blue .driver-popover {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
-  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+/* Force blue background on popover with maximum specificity */
+.driver-popover.driver-theme-blue,
+.driver-theme-blue .driver-popover,
+div[class*="driver-popover"][class*="driver-theme-blue"],
+div.driver-popover.driver-theme-blue {
+  background: #2563eb !important;
+  background-color: #2563eb !important;
+  border: 1px solid #1d4ed8 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  color: #ffffff !important;
+}
+
+/* Ensure all text in the popover is white with maximum specificity */
+.driver-theme-blue .driver-popover *:not(button):not([class*="next-btn"]):not([class*="prev-btn"]):not([class*="close-btn"]),
+.driver-popover.driver-theme-blue *:not(button):not([class*="next-btn"]):not([class*="prev-btn"]):not([class*="close-btn"]),
+div[class*="driver-popover"][class*="driver-theme-blue"] *:not(button):not([class*="next-btn"]):not([class*="prev-btn"]):not([class*="close-btn"]) {
+  color: #ffffff !important;
 }
 
 /* Fix button text doubling/blurring issues */
@@ -21,43 +34,48 @@
 }
 
 .driver-theme-blue .driver-popover-title {
-  color: #1f2937;
+  color: #ffffff !important;
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 8px;
 }
 
 .driver-theme-blue .driver-popover-description {
-  color: #4b5563;
+  color: #ffffff !important;
   font-size: 14px;
   line-height: 1.5;
   margin-bottom: 16px;
 }
 
-.driver-theme-blue .driver-popover-next-btn {
-  background-color: #2563eb;
-  border: none;
-  border-radius: 6px;
-  color: #ffffff;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 8px 16px;
-  transition: background-color 0.2s ease;
-  text-shadow: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.driver-theme-blue .driver-popover-next-btn,
+button[class*="driver-popover-next-btn"],
+.driver-theme-blue button[class*="next"] {
+  background-color: #ffffff !important;
+  border: none !important;
+  border-radius: 6px !important;
+  color: #2563eb !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  padding: 8px 16px !important;
+  transition: background-color 0.2s ease !important;
+  text-shadow: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
 }
 
-.driver-theme-blue .driver-popover-next-btn:hover {
-  background-color: #1d4ed8;
+.driver-theme-blue .driver-popover-next-btn:hover,
+button[class*="driver-popover-next-btn"]:hover,
+.driver-theme-blue button[class*="next"]:hover {
+  background-color: #f8fafc !important;
+  color: #2563eb !important;
 }
 
 .driver-theme-blue .driver-popover-prev-btn {
-  background-color: transparent;
-  border: 1px solid #d1d5db;
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
   border-radius: 6px;
-  color: #6b7280;
+  color: #ffffff !important;
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
@@ -69,15 +87,15 @@
 }
 
 .driver-theme-blue .driver-popover-prev-btn:hover {
-  background-color: #f9fafb;
-  border-color: #9ca3af;
-  color: #374151;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 .driver-theme-blue .driver-popover-close-btn {
-  background-color: transparent;
+  background-color: transparent !important;
   border: none;
-  color: #6b7280;
+  color: #ffffff !important;
   cursor: pointer;
   font-size: 14px;
   padding: 8px 16px;
@@ -88,17 +106,17 @@
 }
 
 .driver-theme-blue .driver-popover-close-btn:hover {
-  color: #374151;
+  color: #ffffff !important;
 }
 
 .driver-theme-blue .driver-popover-progress-text {
-  color: #6b7280;
+  color: #ffffff !important;
   font-size: 12px;
   font-weight: 500;
 }
 
 .driver-theme-blue .driver-popover-footer {
-  border-top: 1px solid #f3f4f6;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding-top: 16px;
   margin-top: 16px;
   display: flex;
@@ -112,44 +130,100 @@
   box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.3), 0 0 15px rgba(37, 99, 235, 0.5);
 }
 
-/* Overlay styling */
+/* Overlay styling - fully transparent */
 .driver-overlay {
-  background: rgba(0, 0, 0, 0.4);
+  background: transparent;
 }
 
-/* Arrow styling - use default driver.js arrows with our colors */
+/* Arrow styling - blue arrows with maximum specificity */
 .driver-theme-blue .driver-popover-arrow-side-left,
 .driver-theme-blue .driver-popover-arrow-side-right,
 .driver-theme-blue .driver-popover-arrow-side-top,
-.driver-theme-blue .driver-popover-arrow-side-bottom {
-  border-color: #ffffff !important;
+.driver-theme-blue .driver-popover-arrow-side-bottom,
+div[class*="driver-popover-arrow-side"],
+[class*="driver-popover-arrow-side-left"],
+[class*="driver-popover-arrow-side-right"],
+[class*="driver-popover-arrow-side-top"],
+[class*="driver-popover-arrow-side-bottom"] {
+  border-color: #2563eb !important;
+  border-width: 8px !important;
+  border-style: solid !important;
 }
 
-/* Ensure arrows point correctly toward target elements */
-.driver-theme-blue .driver-popover-arrow-side-left {
-  border-left-color: #ffffff !important;
+/* Ensure arrows point correctly toward target elements with maximum specificity */
+.driver-theme-blue .driver-popover-arrow-side-left,
+[class*="driver-popover-arrow-side-left"] {
+  border-left-color: #2563eb !important;
   border-right-color: transparent !important;
   border-top-color: transparent !important;
   border-bottom-color: transparent !important;
+  border-left-width: 8px !important;
+  border-right-width: 0 !important;
+  border-top-width: 8px !important;
+  border-bottom-width: 8px !important;
 }
 
-.driver-theme-blue .driver-popover-arrow-side-right {
-  border-right-color: #ffffff !important;
+.driver-theme-blue .driver-popover-arrow-side-right,
+[class*="driver-popover-arrow-side-right"] {
+  border-right-color: #2563eb !important;
   border-left-color: transparent !important;
   border-top-color: transparent !important;
   border-bottom-color: transparent !important;
+  border-right-width: 8px !important;
+  border-left-width: 0 !important;
+  border-top-width: 8px !important;
+  border-bottom-width: 8px !important;
 }
 
-.driver-theme-blue .driver-popover-arrow-side-top {
-  border-top-color: #ffffff !important;
+.driver-theme-blue .driver-popover-arrow-side-top,
+[class*="driver-popover-arrow-side-top"] {
+  border-top-color: #2563eb !important;
   border-bottom-color: transparent !important;
   border-left-color: transparent !important;
   border-right-color: transparent !important;
+  border-top-width: 8px !important;
+  border-bottom-width: 0 !important;
+  border-left-width: 8px !important;
+  border-right-width: 8px !important;
 }
 
-.driver-theme-blue .driver-popover-arrow-side-bottom {
-  border-bottom-color: #ffffff !important;
+.driver-theme-blue .driver-popover-arrow-side-bottom,
+[class*="driver-popover-arrow-side-bottom"] {
+  border-bottom-color: #2563eb !important;
   border-top-color: transparent !important;
   border-left-color: transparent !important;
   border-right-color: transparent !important;
+  border-bottom-width: 8px !important;
+  border-top-width: 0 !important;
+  border-left-width: 8px !important;
+  border-right-width: 8px !important;
+}
+
+/* Nuclear option - override any remaining driver.js defaults */
+div[class*="driver-popover"]:not([class*="driver-popover-arrow"]) {
+  background: #2563eb !important;
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+/* Ensure arrows are visible regardless of other styles */
+div[class*="driver-popover-arrow"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* Force Next button text to be blue - final override */
+.driver-theme-blue .driver-popover-next-btn,
+.driver-theme-blue button[class*="next"],
+button[class*="driver-popover-next"],
+div[class*="driver-theme-blue"] button[class*="next"] {
+  color: #2563eb !important;
+}
+
+.driver-theme-blue .driver-popover-next-btn *,
+.driver-theme-blue button[class*="next"] *,
+button[class*="driver-popover-next"] *,
+div[class*="driver-theme-blue"] button[class*="next"] * {
+  color: #2563eb !important;
 }
