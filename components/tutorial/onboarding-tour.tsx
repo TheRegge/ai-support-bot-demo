@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { driver } from 'driver.js'
 import 'driver.js/dist/driver.css'
 import './driver-theme.css'
@@ -18,28 +18,7 @@ export function OnboardingTour({
 }: OnboardingTourProps) {
   const [tourCompleted, setTourCompleted] = useState(false)
 
-  useEffect(() => {
-    // Check if user has completed the tour before
-    const completed = localStorage.getItem(STORAGE_KEY) === 'true'
-    setTourCompleted(completed)
-
-    // Auto-start tour for first-time visitors
-    if (!completed && !runTour) {
-      // Small delay to ensure page is fully loaded
-      const timer = setTimeout(() => {
-        startTutorial()
-      }, 1000)
-      return () => clearTimeout(timer)
-    }
-  }, [runTour])
-
-  useEffect(() => {
-    if (runTour && !tourCompleted) {
-      startTutorial()
-    }
-  }, [runTour, tourCompleted])
-
-  const startTutorial = () => {
+  const startTutorial = useCallback(() => {
     const driverObj = driver({
       showProgress: true,
       steps: [
@@ -75,7 +54,7 @@ export function OnboardingTour({
       },
       onNextClick: (element, step, options) => {
         // If this is the last step, destroy the driver instead of moving to next
-        if (options.state.activeIndex === options.config.steps.length - 1) {
+        if (options.state.activeIndex === (options.config.steps?.length ?? 0) - 1) {
           driverObj.destroy()
         } else {
           driverObj.moveNext()
@@ -88,7 +67,28 @@ export function OnboardingTour({
     })
 
     driverObj.drive()
-  }
+  }, [onTourEnd, setTourCompleted])
+
+  useEffect(() => {
+    // Check if user has completed the tour before
+    const completed = localStorage.getItem(STORAGE_KEY) === 'true'
+    setTourCompleted(completed)
+
+    // Auto-start tour for first-time visitors
+    if (!completed && !runTour) {
+      // Small delay to ensure page is fully loaded
+      const timer = setTimeout(() => {
+        startTutorial()
+      }, 1000)
+      return () => clearTimeout(timer)
+    }
+  }, [runTour, startTutorial])
+
+  useEffect(() => {
+    if (runTour && !tourCompleted) {
+      startTutorial()
+    }
+  }, [runTour, tourCompleted, startTutorial])
 
   // Don't render anything - driver.js handles its own DOM
   return null
