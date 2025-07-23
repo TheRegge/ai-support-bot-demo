@@ -90,17 +90,16 @@ export default async function Page() {
         </header>
         
         {/* Main Content */}
-        <div className="w-full max-w-6xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-6 lg:py-8 min-w-0">
+        <div className="w-full max-w-6xl mx-auto px-3 sm:px-4 lg:p-8 py-4 sm:py-6 min-w-0">
           <div className="mb-6 sm:mb-8">
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-800 mb-3 leading-tight">AI Customer Support Demo</h1>
             <p className="text-sm sm:text-base lg:text-lg text-gray-600 mb-4 leading-relaxed">Experience our intelligent chatbot assistant! Add items to your cart and try asking:</p>
             <div className="bg-blue-50 border-l-4 border-blue-400 p-3 sm:p-4 rounded-r-lg">
               <ul className="text-gray-700 space-y-1 text-sm sm:text-base">
-                <li className="break-words-safe">• "What's in my cart?" or "Show me my cart total"</li>
-                <li className="break-words-safe">• "Do I qualify for free shipping?"</li>
-                <li className="break-words-safe">• "Tell me about the MacBook Pro" or product questions</li>
-                <li className="break-words-safe">• "What's your return policy?" or shipping info</li>
-                <li className="break-words-safe">• "Can you recommend accessories for my items?"</li>
+                <li className="break-words-safe">• &ldquo;What&apos;s in my cart?&rdquo; or &ldquo;Show me my cart total&rdquo;</li>
+                <li className="break-words-safe">• &ldquo;Do I qualify for free shipping?&rdquo;</li>
+                <li className="break-words-safe">• &ldquo;What are your store policies?&rdquo;</li>
+                <li className="break-words-safe">• &ldquo;Can you help me find a product?&rdquo;</li>
               </ul>
             </div>
             <p className="text-xs sm:text-sm text-gray-500 mt-3">The AI assistant has real-time access to your cart and can provide personalized help!</p>
@@ -109,7 +108,7 @@ export default async function Page() {
           
           <div className="mt-8 sm:mt-12 text-center">
             <div className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 sm:p-6 rounded-lg shadow-lg">
-              <h3 className="text-lg sm:text-xl font-semibold mb-2">🤖 Ready to test the AI assistant?</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">Ready to test the AI assistant?</h3>
               <p className="text-blue-100 mb-4 text-sm sm:text-base leading-relaxed">
                 Click the chat bubble in the bottom-right corner to start a conversation. 
                 The AI knows about your cart, our products, and store policies!
