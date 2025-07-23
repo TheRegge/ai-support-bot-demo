@@ -1,55 +1,42 @@
-import { cookies } from 'next/headers';
-
-import { Chat } from '@/components/chat';
-import { DEFAULT_CHAT_MODEL } from '@/lib/ai/models';
-import { generateUUID } from '@/lib/utils';
-import { DataStreamHandler } from '@/components/data-stream-handler';
+import { ProductGrid } from '@/components/store/product-grid';
+import { ChatWidget } from '@/components/store/chat-widget';
 import { auth } from '../(auth)/auth';
-import { redirect } from 'next/navigation';
 
 export default async function Page() {
   const session = await auth();
-
-  if (!session) {
-    redirect('/api/auth/guest');
-  }
-
-  const id = generateUUID();
-
-  const cookieStore = await cookies();
-  const modelIdFromCookie = cookieStore.get('chat-model');
-
-  if (!modelIdFromCookie) {
-    return (
-      <>
-        <Chat
-          key={id}
-          id={id}
-          initialMessages={[]}
-          initialChatModel={DEFAULT_CHAT_MODEL}
-          initialVisibilityType="private"
-          isReadonly={false}
-          session={session}
-          autoResume={false}
-        />
-        <DataStreamHandler />
-      </>
-    );
-  }
+  const isAuthenticated = !!session?.user;
 
   return (
     <>
-      <Chat
-        key={id}
-        id={id}
-        initialMessages={[]}
-        initialChatModel={modelIdFromCookie.value}
-        initialVisibilityType="private"
-        isReadonly={false}
-        session={session}
-        autoResume={false}
-      />
-      <DataStreamHandler />
+      {/* Store Content */}
+      <div className="min-h-screen bg-gray-50 p-8">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-3xl font-bold text-gray-800 mb-8">TechStore Demo</h1>
+          <ProductGrid />
+          
+          <div className="mt-12 text-center">
+            <p className="text-gray-600">
+              Try the customer support chatbot in the bottom-right corner! 
+              Ask about products, returns, shipping, or warranties.
+            </p>
+            {!isAuthenticated && (
+              <p className="text-sm text-gray-500 mt-2">
+                Guest users have limited chat messages. Sign up for more!
+              </p>
+            )}
+            {isAuthenticated && (
+              <p className="text-sm text-gray-500 mt-2">
+                <a href="/admin" className="text-blue-600 hover:text-blue-800">
+                  Admin Dashboard
+                </a>
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Chat Widget */}
+      <ChatWidget />
     </>
   );
 }
