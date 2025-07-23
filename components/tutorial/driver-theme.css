@@ -1,0 +1,155 @@
+/* Custom driver.js theme to match blue design */
+
+.driver-theme-blue .driver-popover {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Fix button text doubling/blurring issues */
+.driver-theme-blue button,
+.driver-theme-blue .driver-popover-next-btn,
+.driver-theme-blue .driver-popover-prev-btn,
+.driver-theme-blue .driver-popover-close-btn {
+  text-shadow: none !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  backface-visibility: hidden !important;
+  transform: translateZ(0) !important;
+}
+
+.driver-theme-blue .driver-popover-title {
+  color: #1f2937;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.driver-theme-blue .driver-popover-description {
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.driver-theme-blue .driver-popover-next-btn {
+  background-color: #2563eb;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  transition: background-color 0.2s ease;
+  text-shadow: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.driver-theme-blue .driver-popover-next-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.driver-theme-blue .driver-popover-prev-btn {
+  background-color: transparent;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 16px;
+  transition: all 0.2s ease;
+  text-shadow: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.driver-theme-blue .driver-popover-prev-btn:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+  color: #374151;
+}
+
+.driver-theme-blue .driver-popover-close-btn {
+  background-color: transparent;
+  border: none;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 16px;
+  transition: color 0.2s ease;
+  text-shadow: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.driver-theme-blue .driver-popover-close-btn:hover {
+  color: #374151;
+}
+
+.driver-theme-blue .driver-popover-progress-text {
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.driver-theme-blue .driver-popover-footer {
+  border-top: 1px solid #f3f4f6;
+  padding-top: 16px;
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Highlight styling */
+.driver-highlighted-element {
+  border-radius: 4px;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.3), 0 0 15px rgba(37, 99, 235, 0.5);
+}
+
+/* Overlay styling */
+.driver-overlay {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Arrow styling - use default driver.js arrows with our colors */
+.driver-theme-blue .driver-popover-arrow-side-left,
+.driver-theme-blue .driver-popover-arrow-side-right,
+.driver-theme-blue .driver-popover-arrow-side-top,
+.driver-theme-blue .driver-popover-arrow-side-bottom {
+  border-color: #ffffff !important;
+}
+
+/* Ensure arrows point correctly toward target elements */
+.driver-theme-blue .driver-popover-arrow-side-left {
+  border-left-color: #ffffff !important;
+  border-right-color: transparent !important;
+  border-top-color: transparent !important;
+  border-bottom-color: transparent !important;
+}
+
+.driver-theme-blue .driver-popover-arrow-side-right {
+  border-right-color: #ffffff !important;
+  border-left-color: transparent !important;
+  border-top-color: transparent !important;
+  border-bottom-color: transparent !important;
+}
+
+.driver-theme-blue .driver-popover-arrow-side-top {
+  border-top-color: #ffffff !important;
+  border-bottom-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+}
+
+.driver-theme-blue .driver-popover-arrow-side-bottom {
+  border-bottom-color: #ffffff !important;
+  border-top-color: transparent !important;
+  border-left-color: transparent !important;
+  border-right-color: transparent !important;
+}
