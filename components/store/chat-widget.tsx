@@ -30,6 +30,7 @@ export function ChatWidget() {
           onClick={toggleChat}
           className="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg transition-all duration-200 hover:scale-110"
           aria-label="Open customer support chat"
+          data-tour="chat-button"
         >
           <MessageCircle size={24} />
         </button>

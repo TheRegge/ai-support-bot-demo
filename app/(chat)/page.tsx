@@ -3,6 +3,7 @@ import { ChatWidget } from '@/components/store/chat-widget';
 import { StoreLogo } from '@/components/store/store-logo';
 import { CartButton } from '@/components/store/cart-button';
 import { CartProvider } from '@/components/store/cart-context';
+import { OnboardingTour } from '@/components/tutorial/onboarding-tour';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { MenuIcon } from '@/components/icons';
@@ -18,10 +19,10 @@ export default async function Page() {
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
         <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-100">
-          <div className="w-full max-w-6xl mx-auto px-3 sm:px-4 lg:px-8 py-3 sm:py-4">
+          <div className="w-full max-w-6xl mx-auto p-3 sm:p-4 lg:px-8">
             <div className="flex items-center justify-between min-h-[44px] w-full">
               {/* Logo */}
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <StoreLogo className="h-10 sm:h-12 lg:h-16 w-auto" />
               </div>
               
@@ -31,6 +32,7 @@ export default async function Page() {
                   <a 
                     href="/admin" 
                     className="text-sm text-gray-600 hover:text-gray-800 transition-colors font-medium"
+                    data-tour="dashboard-link"
                   >
                     Dashboard
                   </a>
@@ -39,11 +41,11 @@ export default async function Page() {
               </div>
 
               {/* Mobile Navigation */}
-              <div className="md:hidden flex items-center gap-1 flex-shrink-0">
+              <div className="md:hidden flex items-center gap-1 shrink-0">
                 <CartButton />
                 <Sheet>
                   <SheetTrigger asChild>
-                    <Button variant="ghost" size="icon" className="text-gray-600 h-10 w-10">
+                    <Button variant="ghost" size="icon" className="text-gray-600 size-10">
                       <MenuIcon size={18} />
                       <span className="sr-only">Open menu</span>
                     </Button>
@@ -125,6 +127,9 @@ export default async function Page() {
 
       {/* Chat Widget */}
       <ChatWidget />
+
+      {/* Onboarding Tutorial */}
+      <OnboardingTour />
     </CartProvider>
   );
 }

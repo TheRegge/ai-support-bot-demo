@@ -38,9 +38,12 @@ Unlike typical portfolio chatbots, this implementation includes:
 
 ### E-Commerce Platform
 
+> **Note**: This is a demo e-commerce store created as a showcase for the AI support bot capabilities. No real products are sold.
+
 - **Product Catalog**: Clean, responsive product grid with shadcn/ui components
 - **Store Information**: Policies for returns, shipping, and warranties
 - **Modern UI**: Built with Next.js 14 App Router and Tailwind CSS
+- **Onboarding Tour**: Interactive tutorial highlighting key features for new users
 
 ### AI Customer Support Bot
 
