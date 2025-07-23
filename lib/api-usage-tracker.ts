@@ -1,7 +1,17 @@
+import { googleCloudMonitoring, type GoogleApiUsageStats } from './google-cloud-monitoring';
+
 interface UsageStats {
   requestCount: number;
   tokenCount: number;
   lastReset: number;
+}
+
+interface EnhancedUsageStats extends UsageStats {
+  realApiData?: GoogleApiUsageStats;
+  dataSource: 'local' | 'google-cloud' | 'hybrid';
+  lastGoogleCloudSync?: number;
+  errorRate?: number;
+  averageLatency?: number;
 }
 
 // In-memory usage tracking (use database in production)
@@ -56,6 +66,62 @@ export function trackApiUsage(tokenCount = 0) {
   console.log(`API Usage - Requests: ${dailyUsage.requestCount}/${DAILY_LIMITS.MAX_REQUESTS}, Tokens: ${dailyUsage.tokenCount}/${DAILY_LIMITS.MAX_TOKENS}`);
 }
 
+/**
+ * Get enhanced usage statistics combining local tracking with Google Cloud data
+ */
+export async function getEnhancedUsageStats(): Promise<EnhancedUsageStats & {
+  limits: typeof DAILY_LIMITS;
+  percentages: {
+    requests: number;
+    tokens: number;
+  };
+}> {
+  let realApiData: GoogleApiUsageStats | undefined;
+  let dataSource: 'local' | 'google-cloud' | 'hybrid' = 'local';
+  let errorRate: number | undefined;
+  let averageLatency: number | undefined;
+
+  // Try to fetch real Google Cloud data
+  if (googleCloudMonitoring.isConfigured()) {
+    try {
+      realApiData = await googleCloudMonitoring.getGeminiApiUsage(24);
+      dataSource = 'google-cloud';
+      
+      // Calculate additional metrics from real data
+      errorRate = realApiData.requestCount > 0 
+        ? (realApiData.errorCount / realApiData.requestCount) * 100 
+        : 0;
+      averageLatency = realApiData.averageLatency;
+      
+      // Use real data for request count if available
+      if (realApiData.requestCount > dailyUsage.requestCount) {
+        dailyUsage.requestCount = realApiData.requestCount;
+        dataSource = 'hybrid';
+      }
+    } catch (error) {
+      console.warn('Failed to fetch Google Cloud monitoring data:', error);
+      // Fall back to local data
+    }
+  }
+
+  return {
+    ...dailyUsage,
+    realApiData,
+    dataSource,
+    lastGoogleCloudSync: realApiData ? Date.now() : undefined,
+    errorRate,
+    averageLatency,
+    limits: DAILY_LIMITS,
+    percentages: {
+      requests: (dailyUsage.requestCount / DAILY_LIMITS.MAX_REQUESTS) * 100,
+      tokens: (dailyUsage.tokenCount / DAILY_LIMITS.MAX_TOKENS) * 100
+    }
+  };
+}
+
+/**
+ * Legacy function for backward compatibility
+ */
 export function getUsageStats() {
   return {
     ...dailyUsage,
@@ -65,4 +131,38 @@ export function getUsageStats() {
       tokens: (dailyUsage.tokenCount / DAILY_LIMITS.MAX_TOKENS) * 100
     }
   };
+}
+
+/**
+ * Test Google Cloud Monitoring connection
+ */
+export async function testGoogleCloudConnection(): Promise<{
+  isConfigured: boolean;
+  isConnected: boolean;
+  error?: string;
+}> {
+  const isConfigured = googleCloudMonitoring.isConfigured();
+  
+  if (!isConfigured) {
+    return {
+      isConfigured: false,
+      isConnected: false,
+      error: 'Google Cloud Project ID not configured'
+    };
+  }
+
+  try {
+    const isConnected = await googleCloudMonitoring.testConnection();
+    return {
+      isConfigured: true,
+      isConnected,
+      error: isConnected ? undefined : 'Failed to connect to Google Cloud Monitoring'
+    };
+  } catch (error) {
+    return {
+      isConfigured: true,
+      isConnected: false,
+      error: error instanceof Error ? error.message : 'Unknown connection error'
+    };
+  }
 }

@@ -29,6 +29,11 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+# secret settings
+credentials/
+secrets/
+*-service-account*.json
+
 # turbo
 .turbo
 
