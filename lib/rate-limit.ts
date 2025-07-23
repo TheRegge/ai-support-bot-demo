@@ -70,15 +70,15 @@ export function rateLimit(identifier: string, config: RateLimitConfig): RateLimi
 // Predefined rate limit configurations
 export const RATE_LIMITS = {
   STORE_CHAT_IP: {
-    maxRequests: 5,
+    maxRequests: 10, // Increased from 5 to allow normal conversation
     windowMs: 60 * 1000 // 1 minute
   },
   STORE_CHAT_USER_GUEST: {
-    maxRequests: 20,
+    maxRequests: 30, // Increased from 20 for better UX
     windowMs: 24 * 60 * 60 * 1000 // 24 hours
   },
   STORE_CHAT_USER_REGULAR: {
-    maxRequests: 50,
+    maxRequests: 100, // Increased from 50 for registered users
     windowMs: 24 * 60 * 60 * 1000 // 24 hours
   }
 } as const;

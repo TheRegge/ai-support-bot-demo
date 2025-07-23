@@ -219,6 +219,9 @@ export async function POST(request: Request) {
         }
       });
     }
+    
+    // Store warning for response if present
+    const behaviorWarning = botCheck.warning;
 
     // 5. Check API usage limits
     const apiLimitCheck = checkApiLimits();
@@ -312,13 +315,19 @@ export async function POST(request: Request) {
     const generatedText = data.candidates?.[0]?.content?.parts?.[0]?.text || 
       getFallbackResponse(latestMessage.content);
 
-    return new Response(JSON.stringify({ 
+    const responseData = { 
       content: generatedText,
       usage: {
         tokensUsed: tokenCount,
         remaining: userRateLimit.remaining
-      }
-    }), {
+      },
+      ...(behaviorWarning && { 
+        warning: behaviorWarning,
+        warningSeverity: botCheck.severity 
+      })
+    };
+
+    return new Response(JSON.stringify(responseData), {
       headers: { 
         'Content-Type': 'application/json',
         'X-RateLimit-Limit': userRateLimitConfig.maxRequests.toString(),
