@@ -1,8 +1,14 @@
 interface StoreLogoProps {
   className?: string;
+  /** 
+   * Background the logo will appear on:
+   * - 'light': Light background (white/gray) - uses dark text
+   * - 'dark': Dark background - uses light text  
+   */
+  background?: 'light' | 'dark';
 }
 
-export function StoreLogo({ className = "h-10 sm:h-16 lg:h-20" }: StoreLogoProps) {
+export function StoreLogo({ className = "h-10 sm:h-16 lg:h-20", background = 'light' }: StoreLogoProps) {
   return (
     <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 min-w-0">
       {/* Logo Icon - Rounded square with infinity cable */}
@@ -54,8 +60,16 @@ export function StoreLogo({ className = "h-10 sm:h-16 lg:h-20" }: StoreLogoProps
       
       {/* Typography */}
       <div className="flex items-center min-w-0">
-        <h1 className="text-lg sm:text-2xl lg:text-4xl font-bold text-gray-800 tracking-tight truncate">
-          Tech<span className="text-blue-600">Store</span>
+        <h1 className={`text-lg sm:text-2xl lg:text-4xl font-bold tracking-tight truncate ${
+          background === 'dark' 
+            ? 'text-white' 
+            : 'text-gray-800'
+        }`}>
+          Tech<span className={`${
+            background === 'dark' 
+              ? 'text-blue-200' 
+              : 'text-blue-600'
+          }`}>Store</span>
         </h1>
       </div>
     </div>
