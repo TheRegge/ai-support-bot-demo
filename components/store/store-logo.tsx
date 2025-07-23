@@ -2,14 +2,14 @@ interface StoreLogoProps {
   className?: string;
 }
 
-export function StoreLogo({ className = "h-20" }: StoreLogoProps) {
+export function StoreLogo({ className = "h-10 sm:h-16 lg:h-20" }: StoreLogoProps) {
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 min-w-0">
       {/* Logo Icon - Rounded square with infinity cable */}
       <div className="shrink-0">
         <svg 
           viewBox="0 0 100 100" 
-          className="size-20"
+          className={className}
           fill="none" 
           xmlns="http://www.w3.org/2000/svg"
           role="img"
@@ -53,13 +53,10 @@ export function StoreLogo({ className = "h-20" }: StoreLogoProps) {
       </div>
       
       {/* Typography */}
-      <div className="flex items-center gap-3">
-        <h1 className="text-4xl font-bold text-gray-800 tracking-tight">
+      <div className="flex items-center min-w-0">
+        <h1 className="text-lg sm:text-2xl lg:text-4xl font-bold text-gray-800 tracking-tight truncate">
           Tech<span className="text-blue-600">Store</span>
         </h1>
-        <div className="bg-green-500 px-3 py-1 rounded-full">
-          <span className="text-white text-sm font-semibold tracking-wide">DEMO</span>
-        </div>
       </div>
     </div>
   );

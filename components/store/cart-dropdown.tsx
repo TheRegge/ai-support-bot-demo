@@ -80,7 +80,7 @@ export function CartDropdown() {
       </DropdownMenuTrigger>
       
       <DropdownMenuContent 
-        className="w-96 p-0 bg-white border-gray-200" 
+        className="w-80 sm:w-96 max-w-[calc(100vw-2rem)] p-0 bg-white border-gray-200" 
         align="end"
         side="bottom"
         sideOffset={8}

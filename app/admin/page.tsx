@@ -12,14 +12,14 @@ export default async function AdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen bg-gray-50 px-4 sm:px-6 lg:px-8 py-8">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <StoreLogo className="h-16 w-auto" />
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+            <StoreLogo className="h-12 sm:h-16 w-auto" />
             <a 
               href="/" 
-              className="text-sm text-gray-600 hover:text-gray-800 transition-colors"
+              className="text-sm text-gray-600 hover:text-gray-800 transition-colors self-start sm:self-auto"
             >
               ← Back to Store
             </a>
