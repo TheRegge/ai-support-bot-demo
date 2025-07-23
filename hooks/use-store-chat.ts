@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { chatWithAI } from '@/lib/store/chat-service';
-import type { ChatMessage } from '@/lib/store/types';
+import type { ChatMessage, Cart } from '@/lib/store/types';
 
-export function useStoreChat() {
+export function useStoreChat(cart?: Cart) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',
@@ -38,7 +38,7 @@ export function useStoreChat() {
     setIsLoading(true);
 
     try {
-      const response = await chatWithAI(updatedMessages);
+      const response = await chatWithAI(updatedMessages, cart);
       
       setMessages(prev => [...prev, {
         role: 'assistant',

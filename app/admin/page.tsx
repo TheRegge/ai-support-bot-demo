@@ -1,5 +1,6 @@
 import { auth } from '@/app/(auth)/auth';
 import { UsageMonitor } from '@/components/store/usage-monitor';
+import { StoreLogo } from '@/components/store/store-logo';
 import { redirect } from 'next/navigation';
 
 export default async function AdminPage() {
@@ -14,19 +15,19 @@ export default async function AdminPage() {
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Admin Dashboard</h1>
+          <div className="flex items-center justify-between mb-4">
+            <StoreLogo className="h-16 w-auto" />
+            <a 
+              href="/" 
+              className="text-sm text-gray-600 hover:text-gray-800 transition-colors"
+            >
+              ← Back to Store
+            </a>
+          </div>
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">Admin Dashboard</h1>
           <p className="text-gray-600">Monitor API usage and system performance</p>
         </div>
 
-        {/* Navigation back to store */}
-        <div className="mb-6">
-          <a 
-            href="/" 
-            className="text-blue-600 hover:text-blue-800 text-sm"
-          >
-            ← Back to Store
-          </a>
-        </div>
 
         {/* API Usage Monitor */}
         <div className="space-y-6">
@@ -42,7 +43,7 @@ export default async function AdminPage() {
               <div className="bg-white rounded-lg shadow p-6">
                 <h3 className="font-medium text-gray-800 mb-2">Chatbot Status</h3>
                 <div className="flex items-center">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                  <div className="size-2 bg-green-500 rounded-full mr-2" />
                   <span className="text-sm text-gray-600">Operational</span>
                 </div>
               </div>
@@ -50,7 +51,7 @@ export default async function AdminPage() {
               <div className="bg-white rounded-lg shadow p-6">
                 <h3 className="font-medium text-gray-800 mb-2">Rate Limiting</h3>
                 <div className="flex items-center">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                  <div className="size-2 bg-green-500 rounded-full mr-2" />
                   <span className="text-sm text-gray-600">Active</span>
                 </div>
               </div>
@@ -58,7 +59,7 @@ export default async function AdminPage() {
               <div className="bg-white rounded-lg shadow p-6">
                 <h3 className="font-medium text-gray-800 mb-2">Bot Protection</h3>
                 <div className="flex items-center">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                  <div className="size-2 bg-green-500 rounded-full mr-2" />
                   <span className="text-sm text-gray-600">Enabled</span>
                 </div>
               </div>

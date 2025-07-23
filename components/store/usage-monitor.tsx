@@ -90,17 +90,17 @@ export function UsageMonitor() {
           <div className="space-y-2">
             <div className="flex justify-between">
               <span>Used:</span>
-              <span className={getStatusColor(parseFloat(stats.requests.percentage))}>
+              <span className={getStatusColor(Number.parseFloat(stats.requests.percentage))}>
                 {stats.requests.current.toLocaleString()} / {stats.requests.limit.toLocaleString()}
               </span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
               <div 
                 className={`h-2 rounded-full ${
-                  parseFloat(stats.requests.percentage) >= 90 ? 'bg-red-500' :
-                  parseFloat(stats.requests.percentage) >= 75 ? 'bg-yellow-500' : 'bg-green-500'
+                  Number.parseFloat(stats.requests.percentage) >= 90 ? 'bg-red-500' :
+                  Number.parseFloat(stats.requests.percentage) >= 75 ? 'bg-yellow-500' : 'bg-green-500'
                 }`}
-                style={{ width: `${Math.min(parseFloat(stats.requests.percentage), 100)}%` }}
+                style={{ width: `${Math.min(Number.parseFloat(stats.requests.percentage), 100)}%` }}
               />
             </div>
             <p className="text-sm text-gray-600">{stats.requests.percentage}% used</p>
@@ -113,17 +113,17 @@ export function UsageMonitor() {
           <div className="space-y-2">
             <div className="flex justify-between">
               <span>Used:</span>
-              <span className={getStatusColor(parseFloat(stats.tokens.percentage))}>
+              <span className={getStatusColor(Number.parseFloat(stats.tokens.percentage))}>
                 {stats.tokens.current.toLocaleString()} / {stats.tokens.limit.toLocaleString()}
               </span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
               <div 
                 className={`h-2 rounded-full ${
-                  parseFloat(stats.tokens.percentage) >= 90 ? 'bg-red-500' :
-                  parseFloat(stats.tokens.percentage) >= 75 ? 'bg-yellow-500' : 'bg-green-500'
+                  Number.parseFloat(stats.tokens.percentage) >= 90 ? 'bg-red-500' :
+                  Number.parseFloat(stats.tokens.percentage) >= 75 ? 'bg-yellow-500' : 'bg-green-500'
                 }`}
-                style={{ width: `${Math.min(parseFloat(stats.tokens.percentage), 100)}%` }}
+                style={{ width: `${Math.min(Number.parseFloat(stats.tokens.percentage), 100)}%` }}
               />
             </div>
             <p className="text-sm text-gray-600">{stats.tokens.percentage}% used</p>

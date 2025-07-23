@@ -49,7 +49,7 @@ export function checkApiLimits(): { canProceed: boolean; reason?: string } {
   return { canProceed: true };
 }
 
-export function trackApiUsage(tokenCount: number = 0) {
+export function trackApiUsage(tokenCount = 0) {
   dailyUsage.requestCount++;
   dailyUsage.tokenCount += tokenCount;
   

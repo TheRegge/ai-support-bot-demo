@@ -1,13 +1,13 @@
-import type { ChatMessage } from './types';
+import type { ChatMessage, Cart } from './types';
 
-export async function chatWithAI(messages: ChatMessage[]): Promise<string> {
+export async function chatWithAI(messages: ChatMessage[], cart?: Cart): Promise<string> {
   try {
     const response = await fetch('/api/store-chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ messages }),
+      body: JSON.stringify({ messages, cart }),
     });
 
     const data = await response.json();

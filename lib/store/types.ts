@@ -12,6 +12,19 @@ export interface ChatMessage {
   timestamp: number;
 }
 
+export interface CartItem {
+  id: string;
+  product: Product;
+  quantity: number;
+}
+
+export interface Cart {
+  items: CartItem[];
+  total: number;
+  shippingCost: number;
+  itemCount: number;
+}
+
 export interface StoreInfo {
   products: Product[];
   policies: {

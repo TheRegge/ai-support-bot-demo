@@ -1,12 +1,26 @@
 import { STORE_INFO } from '@/lib/store/constants';
-import type { ChatMessage } from '@/lib/store/types';
+import type { ChatMessage, Cart } from '@/lib/store/types';
 import { getClientIP } from '@/lib/get-client-ip';
 import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit';
 import { validateChatMessage, detectBotBehavior } from '@/lib/request-validation';
 import { checkApiLimits, trackApiUsage } from '@/lib/api-usage-tracker';
 import { auth } from '@/app/(auth)/auth';
 
-const STORE_SYSTEM_PROMPT = `You are a helpful customer support assistant for TechStore Demo, an online electronics store.
+function createStoreSystemPrompt(cart?: Cart): string {
+  let cartInfo = '';
+  
+  if (cart && cart.items.length > 0) {
+    cartInfo = `\nCurrent Shopping Cart:
+${cart.items.map(item => `- ${item.product.name}: ${item.product.price} x${item.quantity} = $${(parseFloat(item.product.price.replace('$', '')) * item.quantity).toFixed(2)}`).join('\n')}
+Cart Subtotal: $${cart.total.toFixed(2)}
+Shipping: ${cart.shippingCost === 0 ? 'Free' : `$${cart.shippingCost.toFixed(2)}`}
+Total: $${(cart.total + cart.shippingCost).toFixed(2)}
+Items in cart: ${cart.itemCount}`;
+  } else {
+    cartInfo = '\nCurrent Shopping Cart: Empty';
+  }
+
+  return `You are a helpful customer support assistant for TechStore Demo, an online electronics store.
 
 Our Current Products:
 ${STORE_INFO.products.map(p => `- ${p.name}: ${p.price} (${p.stock} in stock) - ${p.description}`).join('\n')}
@@ -16,12 +30,17 @@ Store Policies:
 - Shipping: ${STORE_INFO.policies.shipping}  
 - Warranty: ${STORE_INFO.policies.warranty}
 
+${cartInfo}
+
 Guidelines:
 - Be friendly, helpful, and professional
 - Focus on helping customers with product information, orders, returns, shipping, and warranties
+- When discussing the cart, use the current cart information provided above
+- You can help customers understand their cart contents, calculate totals, suggest complementary products, or explain shipping costs
 - If asked about products not in our catalog, politely explain we don't carry them but suggest similar items we do have
 - Keep responses concise and relevant to our store
 - If you don't know something specific, offer to connect them with a human agent`;
+}
 
 // Fallback responses when AI is unavailable
 const FALLBACK_RESPONSES = {
@@ -93,7 +112,7 @@ export async function POST(request: Request) {
   const origin = request.headers.get('origin');
   
   try {
-    const { messages }: { messages: ChatMessage[] } = await request.json();
+    const { messages, cart }: { messages: ChatMessage[]; cart?: Cart } = await request.json();
     
     if (!messages || !Array.isArray(messages)) {
       return new Response(JSON.stringify({ 
@@ -242,7 +261,7 @@ export async function POST(request: Request) {
 
     const requestBody = {
       system_instruction: {
-        parts: [{ text: STORE_SYSTEM_PROMPT }]
+        parts: [{ text: createStoreSystemPrompt(cart) }]
       },
       contents: contents,
       generationConfig: {

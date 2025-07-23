@@ -3,13 +3,15 @@
 import { useState } from 'react';
 import { MessageCircle, X, Minimize2, Bot } from 'lucide-react';
 import { useStoreChat } from '@/hooks/use-store-chat';
+import { useCart } from './cart-context';
 import { ChatMessageComponent } from './chat-message';
 import { ChatInput } from './chat-input';
 
 export function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const { messages, input, setInput, isLoading, messagesEndRef, handleSubmit } = useStoreChat();
+  const { cart } = useCart();
+  const { messages, input, setInput, isLoading, messagesEndRef, handleSubmit } = useStoreChat(cart);
 
   const toggleChat = () => {
     setIsOpen(!isOpen);
@@ -77,9 +79,9 @@ export function ChatWidget() {
                     </div>
                     <div className="bg-gray-100 p-3 rounded-lg">
                       <div className="flex space-x-1">
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                        <div className="size-2 bg-gray-400 rounded-full animate-bounce" />
+                        <div className="size-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
+                        <div className="size-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
                       </div>
                     </div>
                   </div>
