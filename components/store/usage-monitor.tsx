@@ -260,8 +260,8 @@ export function UsageMonitor() {
           <div className="border rounded-lg p-3">
             <h5 className="text-sm font-medium mb-1">Error Rate</h5>
             <p className={`text-lg font-semibold ${
-              parseFloat(stats.errorRate) > 5 ? 'text-red-600' :
-              parseFloat(stats.errorRate) > 1 ? 'text-yellow-600' : 'text-green-600'
+              Number.parseFloat(stats.errorRate) > 5 ? 'text-red-600' :
+              Number.parseFloat(stats.errorRate) > 1 ? 'text-yellow-600' : 'text-green-600'
             }`}>
               {stats.errorRate}%
             </p>

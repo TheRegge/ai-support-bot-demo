@@ -217,7 +217,7 @@ class GoogleCloudMonitoringService {
 
       for (const point of series.points || []) {
         const value = point.value?.int64Value 
-          ? parseInt(point.value.int64Value.toString())
+          ? Number.parseInt(point.value.int64Value.toString())
           : point.value?.doubleValue || 0;
 
         totalRequests += value;
