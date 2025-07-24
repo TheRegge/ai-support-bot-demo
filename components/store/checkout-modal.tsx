@@ -43,7 +43,7 @@ export function CheckoutModal({ isOpen, onClose }: CheckoutModalProps) {
             
             <p className="text-center">
               But hey, feel free to keep adding items to your cart and chatting with our 
-              AI assistant - it's having a blast helping you out!
+              AI assistant - it&apos;s having a blast helping you out!
             </p>
           </AlertDialogDescription>
         </AlertDialogHeader>
