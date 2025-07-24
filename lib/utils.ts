@@ -2,14 +2,11 @@ import type {
   CoreAssistantMessage,
   CoreToolMessage,
   UIMessage,
-  UIMessagePart,
 } from 'ai';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import type { DBMessage, Document } from '@/lib/db/schema';
+import type { Document } from '@/lib/db/schema';
 import { ChatSDKError, type ErrorCode } from './errors';
-// Main chat types removed
-import { formatISO } from 'date-fns';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

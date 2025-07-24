@@ -1,7 +1,7 @@
 import { auth } from '@/app/(auth)/auth';
-import { getEnhancedUsageStats, testGoogleCloudConnection } from '@/lib/api-usage-tracker';
+import { getEnhancedUsageStats, } from '@/lib/api-usage-tracker';
 import { getClientIP } from '@/lib/get-client-ip';
-import { rateLimit, RATE_LIMITS } from '@/lib/rate-limit';
+import { rateLimit, } from '@/lib/rate-limit';
 
 // Define strict rate limits for the usage endpoint
 const USAGE_RATE_LIMIT = {
