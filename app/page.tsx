@@ -7,7 +7,7 @@ import { OnboardingTour } from '@/components/tutorial/onboarding-tour';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { MenuIcon } from '@/components/icons';
-import { auth } from '../(auth)/auth';
+import { auth } from './(auth)/auth';
 
 export default async function Page() {
   const session = await auth();
