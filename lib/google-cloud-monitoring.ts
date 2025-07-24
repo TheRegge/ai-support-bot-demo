@@ -1,4 +1,4 @@
-import { MetricServiceClient, monitoring_v3 } from '@google-cloud/monitoring';
+import { MetricServiceClient } from '@google-cloud/monitoring';
 
 interface GoogleApiUsageStats {
   requestCount: number;
@@ -99,7 +99,7 @@ class GoogleCloudMonitoringService {
     const startTime = new Date(now.getTime() - timeRangeHours * 60 * 60 * 1000);
 
     // Create time interval
-    const interval: monitoring_v3.ITimeInterval = {
+    const interval = {
       endTime: {
         seconds: Math.floor(now.getTime() / 1000),
         nanos: (now.getTime() % 1000) * 1000000,
@@ -165,15 +165,15 @@ class GoogleCloudMonitoringService {
   private async fetchMetric(
     projectName: string,
     metricType: string,
-    interval: monitoring_v3.ITimeInterval
-  ): Promise<monitoring_v3.ITimeSeries[]> {
+    interval: any
+  ): Promise<any[]> {
     const filter = `
       metric.type = "${metricType}" AND
       resource.type = "consumed_api" AND
       resource.labels.service = "generativelanguage.googleapis.com"
     `.trim();
 
-    const request: monitoring_v3.IListTimeSeriesRequest = {
+    const request: any = {
       name: projectName,
       filter,
       interval,
@@ -200,8 +200,8 @@ class GoogleCloudMonitoringService {
    * Process raw monitoring data into usable statistics
    */
   private processUsageData(
-    requestData: monitoring_v3.ITimeSeries[],
-    latencyData: monitoring_v3.ITimeSeries[],
+    requestData: any[],
+    latencyData: any[],
     timeWindow: { start: Date; end: Date }
   ): GoogleApiUsageStats {
     let totalRequests = 0;
