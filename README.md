@@ -30,7 +30,7 @@ Unlike typical portfolio chatbots, this implementation includes:
 - **Real AI Integration**: Powered by Google's Gemini AI for natural conversations
 - **Production Monitoring**: Real-time usage dashboard with Google Cloud integration
 - **Smart Rate Limiting**: Progressive warnings and intelligent abuse protection
-- **Enterprise Security**: Multi-layered defense with comprehensive bot detection
+- **Enterprise Security**: Advanced prompt injection protection and content filtering
 - **Cost Protection**: Automatic API usage monitoring and circuit breakers
 - **Production Architecture**: Scalable design with proper error handling and fallbacks
 
@@ -72,6 +72,11 @@ Unlike typical portfolio chatbots, this implementation includes:
   - Multi-message behavior analysis
   - Automatic suspicious activity logging
   - Graceful degradation with user feedback
+- **Enterprise-Grade AI Security**:
+  - **Prompt Injection Protection**: Advanced pattern matching to prevent instruction overrides
+  - **Role Manipulation Defense**: Blocks attempts to change AI behavior or extract system prompts
+  - **Content Sanitization**: Removes malicious scripts, HTML, and code injection attempts
+  - **Security Audit Logging**: Comprehensive tracking of all security events and threats
 - **Enterprise Security Headers**:
   - CORS protection with domain whitelisting
   - Comprehensive security headers (CSP, XSS, etc.)
@@ -80,6 +85,7 @@ Unlike typical portfolio chatbots, this implementation includes:
   - Message length limits (500 chars)
   - Special character filtering
   - Enhanced spam and bot detection
+  - Real-time threat pattern analysis
 
 ## 🛡️ Safety & Security
 
@@ -90,16 +96,18 @@ Unlike typical portfolio chatbots, this implementation includes:
 
 ```
 User Request → CORS Check → Security Headers → IP Rate Limit
-→ User Rate Limit → Content Validation → Bot Detection
-→ API Limit Check → AI Processing → Response
+→ User Rate Limit → Content Validation → Prompt Injection Check
+→ Bot Detection → Content Sanitization → API Limit Check 
+→ AI Processing (with hardened system prompt) → Response
 ```
 
 ### Protection Layers
 
 1. **Network Level**: CORS, security headers, IP tracking
 2. **Application Level**: Rate limiting, validation, bot detection
-3. **API Level**: Usage monitoring, circuit breakers, fallbacks
-4. **Data Level**: Input sanitization, output filtering
+3. **AI Security Level**: Prompt injection protection, role manipulation defense, content sanitization
+4. **API Level**: Usage monitoring, circuit breakers, fallbacks
+5. **Data Level**: Input sanitization, output filtering, security audit logging
 
 ### Security Headers
 
@@ -252,7 +260,7 @@ curl -X GET http://localhost:3000/api/store-usage
 This project demonstrates:
 
 - **Production Monitoring**: Real-time dashboard with Google Cloud integration
-- **Enterprise Security**: Multi-layered protection with intelligent rate limiting
+- **Enterprise Security**: Advanced AI security with prompt injection protection
 - **System Design**: Scalable architecture with proper monitoring and observability
 - **Error Handling**: Graceful degradation with user-friendly progressive warnings
 - **Cloud Integration**: Seamless local development to production deployment
@@ -261,6 +269,7 @@ This project demonstrates:
 ## 📝 Documentation
 
 - [Google Cloud Monitoring Setup](GOOGLE_CLOUD_SETUP.md) - Complete setup guide for local and production
+- [AI Security Implementation](docs/ai-security.md) - Comprehensive guide to prompt injection protection
 - [Safety & Bot Protection System](docs/safety-bot-protection.md)
 - [API Documentation](docs/api.md) _(coming soon)_
 - [Deployment Guide](docs/deployment.md) _(coming soon)_
